@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.io.IOException;
+
 @Controller
 public class TodoController {
 
@@ -15,7 +17,7 @@ public class TodoController {
     private TodoService todoService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/todo")
-    public String todoList(Model model) {
+    public String todoList(Model model) throws IOException {
         model.addAttribute("todos", todoService.get());
         return "todo";
     }

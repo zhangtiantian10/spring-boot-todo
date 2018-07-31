@@ -20,4 +20,8 @@ public class HelloService {
                 .findFirst()
                 .get();
     }
+
+    public List<Person> list() {
+        return personRepository.list();
+    }
 }

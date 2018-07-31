@@ -23,9 +23,5 @@ public class TodoRepository {
         String todosData =  IOUtils.toString(todos.getInputStream(), Charset.forName("UTF-8"));
 
         return readFile.read(todosData);
-//        return ImmutableList.of(
-//                new Todo(1, "不用鼠标"),
-//                new Todo(2, "不用触摸板")
-//        );
     }
 }

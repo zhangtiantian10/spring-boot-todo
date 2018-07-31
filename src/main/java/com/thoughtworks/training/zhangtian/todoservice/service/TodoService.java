@@ -15,7 +15,6 @@ public class TodoService {
     private TodoRepository todoRepository;
 
     public List<Todo> get() throws IOException {
-        List<Todo> todos = todoRepository.list();
-        return todos;
+        return todoRepository.list();
     }
 }

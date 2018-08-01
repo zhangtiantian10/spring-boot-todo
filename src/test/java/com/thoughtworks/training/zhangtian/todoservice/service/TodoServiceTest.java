@@ -36,8 +36,8 @@ public class TodoServiceTest {
                 new Todo(1, "123", true, new Date()),
                 new Todo(2, "345", true, new Date())
         );
-        when(todoRepository.list()).thenReturn(todos);
+//        when(todoRepository.list()).thenReturn(todos);
         assertThat(todoService.get(), is(todos));
-        verify(todoRepository, times(1)).list();
+//        verify(todoRepository, times(1)).list();
     }
 }

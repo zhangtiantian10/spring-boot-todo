@@ -13,7 +13,6 @@ public class ReadFile {
     public List<Todo> read(String dataString) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        List<Todo> data =  objectMapper.readValue(dataString, new TypeReference<List<Todo>>(){});
-        return data;
+        return objectMapper.readValue(dataString, new TypeReference<List<Todo>>(){});
     }
 }

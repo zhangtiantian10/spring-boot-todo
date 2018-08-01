@@ -1,22 +1,20 @@
 package com.thoughtworks.training.zhangtian.todoservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "items")
+@SQLDelete(sql = "UPDATE todo SET deleted=1 WHERE id=?")
+@Where(clause = "deleted = false")
 public class Todo {
     @Id
     @GeneratedValue
@@ -24,4 +22,8 @@ public class Todo {
     private String value;
     private Boolean isComplete;
     private Date date;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "todo_id")
+    private List<Task> tasks;
 }

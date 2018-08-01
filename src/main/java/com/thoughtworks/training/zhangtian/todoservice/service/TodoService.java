@@ -3,6 +3,7 @@ package com.thoughtworks.training.zhangtian.todoservice.service;
 import com.thoughtworks.training.zhangtian.todoservice.model.Todo;
 import com.thoughtworks.training.zhangtian.todoservice.repository.TodoRepository;
 import javassist.NotFoundException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,17 @@ public class TodoService {
 
     public Integer create(Todo todo) {
         return todoRepository.save(todo).getId();
+    }
+
+    public Integer update(Integer id, Todo todo) {
+        Todo one = todoRepository.findOne(id);
+
+        BeanUtils.copyProperties(todo, one, "id");
+
+        return todoRepository.save(one).getId();
+    }
+
+    public void delete(Integer id) {
+        todoRepository.delete(id);
     }
 }

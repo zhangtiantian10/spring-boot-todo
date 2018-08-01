@@ -29,4 +29,14 @@ public class TodoControllerRest {
     public Integer create(@RequestBody Todo todo) {
         return todoService.create(todo);
     }
+
+    @PutMapping("/todos/{id}")
+    public Integer update(@PathVariable Integer id, @RequestBody Todo todo) {
+        return todoService.update(id, todo);
+    }
+
+    @DeleteMapping("/todos/{id}")
+    public void delete(@PathVariable Integer id) {
+        todoService.delete(id);
+    }
 }

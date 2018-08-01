@@ -22,4 +22,8 @@ public class TodoService {
         return Optional.ofNullable(todoRepository.findOne(id))
                 .orElseThrow(() -> new NotFoundException("not found"));
     }
+
+    public Integer create(Todo todo) {
+        return todoRepository.save(todo).getId();
+    }
 }

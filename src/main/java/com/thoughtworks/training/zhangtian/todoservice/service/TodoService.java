@@ -31,7 +31,7 @@ public class TodoService {
     public Integer update(Integer id, Todo todo) {
         Todo one = todoRepository.findOne(id);
 
-        BeanUtils.copyProperties(todo, one, "id");
+        BeanUtils.copyProperties(todo, one, "id", "tasks");
 
         return todoRepository.save(one).getId();
     }

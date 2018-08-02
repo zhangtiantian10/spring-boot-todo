@@ -1,15 +1,15 @@
 package com.thoughtworks.training.zhangtian.todoservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.catalina.mapper.Mapper;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -24,4 +24,7 @@ public class Task {
     private Integer id;
 
     private String content;
+
+    @Column(name = "todo_id")
+    private Integer todoId;
 }

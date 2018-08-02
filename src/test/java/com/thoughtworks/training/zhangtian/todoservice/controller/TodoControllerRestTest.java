@@ -39,8 +39,8 @@ public class TodoControllerRestTest {
     @Test
     public void testTodoList() throws Exception {
         List<Todo> todos = ImmutableList.of(
-                new Todo(1, "123", true, new Date()),
-                new Todo(2, "345", true, new Date())
+//                new Todo(1, "123", true, new Date()),
+//                new Todo(2, "345", true, new Date())
         );
 
 //        when(todoRepository.list()).thenReturn(todos);

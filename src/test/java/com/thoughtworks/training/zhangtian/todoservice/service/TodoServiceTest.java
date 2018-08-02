@@ -33,8 +33,8 @@ public class TodoServiceTest {
     @Test
     public void testGet() throws IOException {
         List<Todo> todos = ImmutableList.of(
-                new Todo(1, "123", true, new Date()),
-                new Todo(2, "345", true, new Date())
+//                new Todo(1, "123", true, new Date()),
+//                new Todo(2, "345", true, new Date())
         );
 //        when(todoRepository.list()).thenReturn(todos);
         assertThat(todoService.get(), is(todos));

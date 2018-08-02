@@ -26,4 +26,7 @@ public class Todo {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "todo_id")
     private List<Task> tasks;
+
+    @Column(name = "user_id")
+    private Integer userId;
 }

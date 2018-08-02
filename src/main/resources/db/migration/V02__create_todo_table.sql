@@ -3,5 +3,7 @@ create table todo(
   `value` varchar(255),
   `is_complete` boolean default false,
   `date` timestamp default now(),
-  `deleted` boolean default false
+  `user_id` int,
+  `deleted` boolean default false,
+	foreign key (user_id) references user(id)
 );

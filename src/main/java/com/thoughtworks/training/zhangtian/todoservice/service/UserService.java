@@ -36,4 +36,12 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findOneByName(user.getName());
         return optionalUser.filter(u -> encoder.matches(user.getPassword(), u.getPassword())).isPresent();
     }
+
+    public User getUserByName(String name) {
+
+        Optional<User> optionalUser = userRepository.findOneByName(name);
+
+        return optionalUser.orElse(null);
+
+    }
 }

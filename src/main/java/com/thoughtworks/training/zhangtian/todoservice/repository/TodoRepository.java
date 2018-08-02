@@ -17,6 +17,8 @@ import java.util.List;
 public interface TodoRepository extends JpaRepository<Todo, Integer> {
     List<Todo> findByValue(String value);
 
+    List<Todo> findAllByUserId(Integer userId);
+
 //
 //    @Value("classpath:static/todos.json")
 //    private Resource todos;

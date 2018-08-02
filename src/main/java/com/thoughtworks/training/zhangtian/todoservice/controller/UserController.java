@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserController {
@@ -50,7 +51,10 @@ public class UserController {
                     .addClaims(claims)
                     .signWith(SignatureAlgorithm.HS512, privatePassword.getBytes())
                     .compact();
-            return ResponseEntity.ok(token);
+
+            Map<String, String> result = new HashMap<>();
+            result.put("token", token);
+            return ResponseEntity.ok(result);
         }
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);

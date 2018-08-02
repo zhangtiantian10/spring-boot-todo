@@ -34,9 +34,14 @@ public class TodoAuthFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (!StringUtils.isEmpty(token)) {
-            if (validateToken(token)) {
-                String name = token.split(":")[0];
+            Claims body = Jwts.parser()
+                    .setSigningKey(privatePassword.getBytes())
+                    .parseClaimsJws(token)
+                    .getBody();
 
+            if (validateToken(body)) {
+
+                String name = (String) body.get("name");
                 SecurityContextHolder.getContext().setAuthentication(
                         new UsernamePasswordAuthenticationToken(name,
                                 null,
@@ -48,11 +53,7 @@ public class TodoAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private boolean validateToken(String token) {
-        Claims body = Jwts.parser()
-                .setSigningKey(privatePassword.getBytes())
-                .parseClaimsJws(token)
-                .getBody();
+    private boolean validateToken(Claims body) {
 
         User user = new User();
         user.setName((String) body.get("name"));

@@ -44,13 +44,13 @@ public class TodoControllerRestTest {
     @Test
     public void testTodoList() throws Exception {
         List<Todo> todos = ImmutableList.of(
-                new Todo(1, "123", true, new Date(), ImmutableList.of(), 1),
-                new Todo(2, "345", true, new Date(), ImmutableList.of(), 1)
+                new Todo(1, "123", true, new Date(), ImmutableList.of(), 1, false),
+                new Todo(2, "345", true, new Date(), ImmutableList.of(), 1, false)
         );
 
         when(todoRepository.findAllByUserId(1)).thenReturn(todos);
 
-        String token = tokenGenerate.getToken(new User(1, "zhang", "123456", null));
+        String token = tokenGenerate.getToken(new User(1, "zhang", "123456", null, false));
         MvcResult mvcResult = mockMvc
                 .perform(get("/todos").header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
@@ -76,8 +76,8 @@ public class TodoControllerRestTest {
     @Test
     public void shouldReturnTodosSetSecurityContext() throws Exception {
         List<Todo> todos = ImmutableList.of(
-                new Todo(1, "123", true, new Date(), ImmutableList.of(), 1),
-                new Todo(2, "345", true, new Date(), ImmutableList.of(), 1)
+                new Todo(1, "123", true, new Date(), ImmutableList.of(), 1, false),
+                new Todo(2, "345", true, new Date(), ImmutableList.of(), 1, false)
         );
         when(todoRepository.findAllByUserId(1)).thenReturn(todos);
 

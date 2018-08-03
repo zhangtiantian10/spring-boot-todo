@@ -23,7 +23,7 @@ public class UserRepositoryTest {
 
     @Test
     public void shouldReturnUserByName() {
-        User jianpan = new User(1, "jianpan", "12345", ImmutableList.of());
+        User jianpan = new User(1, "jianpan", "12345", ImmutableList.of(), false);
         userRepository.save(jianpan);
 
         Optional<User> user = userRepository.findOneByName("jianpan");

@@ -24,7 +24,8 @@ public class TodoService {
 
         int id = (int) authentication.getPrincipal();
 
-        return todoRepository.findAllByUserId(id);
+        List<Todo> allByUserId = todoRepository.findAllByUserId(id);
+        return allByUserId;
     }
 
     public Todo findById(int id) throws NotFoundException {

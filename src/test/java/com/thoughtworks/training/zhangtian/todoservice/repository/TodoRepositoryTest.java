@@ -27,9 +27,9 @@ public class TodoRepositoryTest {
 
     @Test
     public void shouldReturnTodoByUserId() {
-        User user = new User(1, "jianpan", "12345", ImmutableList.of());
+        User user = new User(1, "jianpan", "12345", ImmutableList.of(), false);
         userRepository.save(user);
-        Todo todo = new Todo(1, "123456", false, new Date(), ImmutableList.of(), 1);
+        Todo todo = new Todo(1, "123456", false, new Date(), ImmutableList.of(), 1, false);
         todoRepository.save(todo);
 
         List<Todo> users = todoRepository.findAllByUserId(1);

@@ -1,5 +1,6 @@
 package com.thoughtworks.training.zhangtian.todoservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,4 +28,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<Todo> todos;
+
+    @Builder.Default
+    private Boolean deleted = false;
 }

@@ -27,4 +27,7 @@ public class Task {
 
     @Column(name = "todo_id")
     private Integer todoId;
+
+    @Builder.Default
+    private Boolean deleted = false;
 }

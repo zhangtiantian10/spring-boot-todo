@@ -1,5 +1,6 @@
 package com.thoughtworks.training.zhangtian.todoservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -29,4 +30,7 @@ public class Todo {
 
     @Column(name = "user_id")
     private Integer userId;
+
+    @Builder.Default
+    private Boolean deleted = false;
 }

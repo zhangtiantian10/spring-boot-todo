@@ -19,19 +19,12 @@ public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
-    @Autowired
-    private UserService userService;
-
     public List<Todo> get() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        String name = (String) authentication.getPrincipal();
-        User user = userService.getUserByName(name);
-        if (user == null) {
-            return ImmutableList.of();
-        }
+        int id = (int) authentication.getPrincipal();
 
-        return todoRepository.findAllByUserId(user.getId());
+        return todoRepository.findAllByUserId(id);
     }
 
     public Todo findById(int id) throws NotFoundException {
@@ -42,10 +35,9 @@ public class TodoService {
     public Integer create(Todo todo) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        String name = (String) authentication.getPrincipal();
-        User user = userService.getUserByName(name);
+        int id = (int) authentication.getPrincipal();
 
-        todo.setUserId(user.getId());
+        todo.setUserId(id);
         return todoRepository.save(todo).getId();
     }
 

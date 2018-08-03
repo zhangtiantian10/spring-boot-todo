@@ -39,15 +39,13 @@ public class TodoAuthFilter extends OncePerRequestFilter {
                     .parseClaimsJws(token)
                     .getBody();
 
-            if (validateToken(body)) {
 
-                String name = (String) body.get("name");
+                int id = (int) body.get("id");
                 SecurityContextHolder.getContext().setAuthentication(
-                        new UsernamePasswordAuthenticationToken(name,
+                        new UsernamePasswordAuthenticationToken(id,
                                 null,
                                 Collections.emptyList())
                 );
-            }
         }
 
         filterChain.doFilter(request, response);

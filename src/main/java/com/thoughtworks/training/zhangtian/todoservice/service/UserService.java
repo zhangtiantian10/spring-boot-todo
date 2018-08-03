@@ -37,6 +37,16 @@ public class UserService {
         return optionalUser.filter(u -> encoder.matches(user.getPassword(), u.getPassword())).isPresent();
     }
 
+    public User validateLogin(User user) {
+        Optional<User> optionalUser = userRepository.findOneByName(user.getName());
+        if (optionalUser.filter(u -> encoder.matches(user.getPassword(), u.getPassword())).isPresent()) {
+            return optionalUser.get();
+        }
+
+        return null;
+    }
+
+
     public User getUserByName(String name) {
 
         Optional<User> optionalUser = userRepository.findOneByName(name);

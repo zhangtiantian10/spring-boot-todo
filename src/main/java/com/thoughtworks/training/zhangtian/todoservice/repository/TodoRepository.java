@@ -18,16 +18,4 @@ public interface TodoRepository extends JpaRepository<Todo, Integer> {
     List<Todo> findByValue(String value);
 
     List<Todo> findAllByUserId(Integer userId);
-
-//
-//    @Value("classpath:static/todos.json")
-//    private Resource todos;
-//
-//    @Autowired
-//    private ReadFile readFile;
-//    public List<Todo> list() throws IOException {
-//        String todosData =  IOUtils.toString(todos.getInputStream(), Charset.forName("UTF-8"));
-//
-//        return readFile.read(todosData);
-//    }
 }

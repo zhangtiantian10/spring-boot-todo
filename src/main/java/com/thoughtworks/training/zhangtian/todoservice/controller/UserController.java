@@ -1,5 +1,6 @@
 package com.thoughtworks.training.zhangtian.todoservice.controller;
 
+import com.thoughtworks.training.zhangtian.todoservice.TokenGenerate;
 import com.thoughtworks.training.zhangtian.todoservice.model.User;
 import com.thoughtworks.training.zhangtian.todoservice.service.UserService;
 import io.jsonwebtoken.Jwts;
@@ -23,6 +24,9 @@ public class UserController {
     @Value("${private.password}")
     private String privatePassword;
 
+    @Autowired
+    private TokenGenerate tokenGenerate;
+
     @PostMapping("/users")
     public Integer create(@RequestBody User user) {
         return userService.create(user);
@@ -42,16 +46,9 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody User user) {
-        if (userService.validate(user)) {
-            HashMap<String, Object> claims = new HashMap<>();
-            claims.put("name", user.getName());
-            claims.put("password", user.getPassword());
-
-            String token = Jwts.builder()
-                    .addClaims(claims)
-                    .signWith(SignatureAlgorithm.HS512, privatePassword.getBytes())
-                    .compact();
-
+        user = userService.validateLogin(user);
+        if (user != null) {
+            String token = tokenGenerate.getToken(user);
             Map<String, String> result = new HashMap<>();
             result.put("token", token);
             return ResponseEntity.ok(result);

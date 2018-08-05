@@ -53,8 +53,7 @@ public class TodoControllerRestTest {
         when(todoRepository.findAllByUserId(1)).thenReturn(todos);
 
         String token = tokenGenerate.getToken(new User(1, "zhang", "123456", null, false));
-        MvcResult mvcResult = mockMvc
-                .perform(get("/todos").header(HttpHeaders.AUTHORIZATION, token))
+        mockMvc.perform(get("/todos").header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.length()").value(2))
@@ -69,8 +68,7 @@ public class TodoControllerRestTest {
 
     @Test
     public void shouldReturn401GetAllTodos() throws Exception {
-        MvcResult mvcResult = mockMvc
-                .perform(get("/todos"))
+        mockMvc.perform(get("/todos"))
                 .andExpect(status().isUnauthorized())
                 .andReturn();
     }
@@ -89,8 +87,7 @@ public class TodoControllerRestTest {
                         Collections.emptyList())
         );
 
-        MvcResult mvcResult = mockMvc
-                .perform(get("/todos"))
+        mockMvc.perform(get("/todos"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.length()").value(2))

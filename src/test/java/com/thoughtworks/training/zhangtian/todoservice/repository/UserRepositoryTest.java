@@ -2,7 +2,6 @@ package com.thoughtworks.training.zhangtian.todoservice.repository;
 
 import com.google.common.collect.ImmutableList;
 import com.thoughtworks.training.zhangtian.todoservice.model.User;
-import com.thoughtworks.training.zhangtian.todoservice.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 @DataJpaTest
 @RunWith(SpringRunner.class)

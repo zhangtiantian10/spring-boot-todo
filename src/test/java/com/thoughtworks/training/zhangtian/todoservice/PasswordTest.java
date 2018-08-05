@@ -10,13 +10,13 @@ import static org.junit.Assert.assertTrue;
 public class PasswordTest {
     @Test
     public void testPassword() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        System.out.println(bCryptPasswordEncoder.encode("zhang"));
-        System.out.println(bCryptPasswordEncoder.encode("zhang"));
-        System.out.println(bCryptPasswordEncoder.encode("zhang"));
-        System.out.println(bCryptPasswordEncoder.encode("zhang"));
-        System.out.println(bCryptPasswordEncoder.encode("zhang"));
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        System.out.println(encoder.encode("zhang"));
+        System.out.println(encoder.encode("zhang"));
+        System.out.println(encoder.encode("zhang"));
+        System.out.println(encoder.encode("zhang"));
+        System.out.println(encoder.encode("zhang"));
 //        assertTrue();
-        assertFalse(bCryptPasswordEncoder.matches("zhangt", bCryptPasswordEncoder.encode("zhang")));
+        assertFalse(encoder.matches("zhangt", encoder.encode("zhang")));
     }
 }

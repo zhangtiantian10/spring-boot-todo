@@ -35,7 +35,7 @@ public class TodoAuthFilter extends OncePerRequestFilter {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (!StringUtils.isEmpty(token)) {
             Claims body = Jwts.parser()
-                    .setSigningKey(privatePassword.getBytes())
+                    .setSigningKey(privatePassword.getBytes("UTF-8"))
                     .parseClaimsJws(token)
                     .getBody();
 

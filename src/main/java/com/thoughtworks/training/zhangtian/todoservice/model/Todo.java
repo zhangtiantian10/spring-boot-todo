@@ -39,6 +39,6 @@ public class Todo {
     @Column(name = "user_id")
     private Integer userId;
 
-    @Builder.Default
+    @Column(name = "deleted", columnDefinition = "int default 0")
     private Boolean deleted = false;
 }

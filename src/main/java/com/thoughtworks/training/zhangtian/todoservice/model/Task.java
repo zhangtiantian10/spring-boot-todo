@@ -30,6 +30,6 @@ public class Task {
     @Column(name = "todo_id")
     private Integer todoId;
 
-    @Builder.Default
+    @Column(name = "deleted", columnDefinition = "int default 0")
     private Boolean deleted = false;
 }

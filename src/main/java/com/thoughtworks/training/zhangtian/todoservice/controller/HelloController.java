@@ -1,12 +1,12 @@
 package com.thoughtworks.training.zhangtian.todoservice.controller;
 
-import com.thoughtworks.training.zhangtian.todoservice.model.Person;
 import com.thoughtworks.training.zhangtian.todoservice.service.HelloService;
-import jdk.nashorn.internal.lookup.MethodHandleFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HelloController {

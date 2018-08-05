@@ -3,6 +3,8 @@ package com.thoughtworks.training.zhangtian.todoservice.service;
 import com.thoughtworks.training.zhangtian.todoservice.model.User;
 import com.thoughtworks.training.zhangtian.todoservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -53,5 +55,13 @@ public class UserService {
 
         return optionalUser.orElse(null);
 
+    }
+
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        int id = (int) authentication.getPrincipal();
+
+        return userRepository.findOne(id);
     }
 }

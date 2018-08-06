@@ -1,6 +1,7 @@
 package com.thoughtworks.training.zhangtian.todoservice.service;
 
 import com.thoughtworks.training.zhangtian.todoservice.model.Todo;
+import com.thoughtworks.training.zhangtian.todoservice.model.User;
 import com.thoughtworks.training.zhangtian.todoservice.repository.TodoRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.BeanUtils;
@@ -20,9 +21,9 @@ public class TodoService {
     public List<Todo> get() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        int id = (int) authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
 
-        List<Todo> allByUserId = todoRepository.findAllByUserId(id);
+        List<Todo> allByUserId = todoRepository.findAllByUserId(user.getId());
         return allByUserId;
     }
 
@@ -34,9 +35,9 @@ public class TodoService {
     public Integer create(Todo todo) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        int id = (int) authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
 
-        todo.setUserId(id);
+        todo.setUserId(user.getId());
         return todoRepository.save(todo).getId();
     }
 

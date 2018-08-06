@@ -36,7 +36,6 @@ public class Todo {
     @JoinColumn(name = "todo_id")
     private List<Task> tasks;
 
-    @Column(name = "user_id")
     private Integer userId;
 
     @Column(name = "deleted", columnDefinition = "int default 0")

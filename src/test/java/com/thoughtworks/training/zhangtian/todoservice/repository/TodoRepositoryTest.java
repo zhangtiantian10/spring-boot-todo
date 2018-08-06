@@ -22,13 +22,8 @@ public class TodoRepositoryTest {
     @Autowired
     private TodoRepository todoRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @Test
     public void shouldReturnTodoByUserId() {
-        User user = new User(1, "jianpan", "12345", ImmutableList.of(), false);
-        userRepository.save(user);
         Todo todo = new Todo(1, "123456", false, new Date(), ImmutableList.of(), 1, false);
         todoRepository.save(todo);
 

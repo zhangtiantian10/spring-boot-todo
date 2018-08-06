@@ -17,7 +17,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.Collections;
 import java.util.Date;
@@ -52,7 +51,7 @@ public class TodoControllerRestTest {
 
         when(todoRepository.findAllByUserId(1)).thenReturn(todos);
 
-        String token = tokenGenerate.getToken(new User(1, "zhang", "123456", null, false));
+        String token = tokenGenerate.getToken(new User(1, "zhang", "123456"));
         mockMvc.perform(get("/todos").header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))

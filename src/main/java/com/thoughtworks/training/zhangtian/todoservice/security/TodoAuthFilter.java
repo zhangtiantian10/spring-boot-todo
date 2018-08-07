@@ -1,11 +1,6 @@
 package com.thoughtworks.training.zhangtian.todoservice.security;
 
-import com.thoughtworks.training.zhangtian.todoservice.feign.UserFeign;
 import com.thoughtworks.training.zhangtian.todoservice.model.User;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

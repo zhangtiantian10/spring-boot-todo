@@ -1,7 +1,6 @@
 package com.thoughtworks.training.zhangtian.todoservice.controller;
 
 import com.google.common.collect.ImmutableList;
-import com.thoughtworks.training.zhangtian.todoservice.TokenGenerate;
 import com.thoughtworks.training.zhangtian.todoservice.model.Todo;
 import com.thoughtworks.training.zhangtian.todoservice.model.User;
 import com.thoughtworks.training.zhangtian.todoservice.repository.TodoRepository;
@@ -39,9 +38,6 @@ public class TodoControllerRestTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private TokenGenerate tokenGenerate;
-
     @Test
     public void testTodoList() throws Exception {
         List<Todo> todos = ImmutableList.of(
@@ -51,7 +47,7 @@ public class TodoControllerRestTest {
 
         when(todoRepository.findAllByUserId(1)).thenReturn(todos);
 
-        String token = tokenGenerate.getToken(new User(1, "zhang", "123456"));
+        String token = "1:zhang";
         mockMvc.perform(get("/todos").header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -80,8 +76,12 @@ public class TodoControllerRestTest {
         );
         when(todoRepository.findAllByUserId(1)).thenReturn(todos);
 
+        User user = new User();
+        user.setId(1);
+        user.setName("zhang");
+
         SecurityContextHolder.getContext().setAuthentication(
-                new UsernamePasswordAuthenticationToken(1,
+                new UsernamePasswordAuthenticationToken(user,
                         null,
                         Collections.emptyList())
         );

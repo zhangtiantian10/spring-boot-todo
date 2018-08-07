@@ -2,6 +2,8 @@ package com.thoughtworks.training.zhangtian.todoservice.security;
 
 import com.thoughtworks.training.zhangtian.todoservice.feign.UserFeign;
 import com.thoughtworks.training.zhangtian.todoservice.model.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -20,19 +22,13 @@ import java.util.Collections;
 
 @Component
 public class TodoAuthFilter extends OncePerRequestFilter {
-    @Value("${private.password}")
-    private String privatePassword;
-
-    @Autowired
-    private UserFeign userFeign;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (!StringUtils.isEmpty(token)) {
-            User user = userFeign.validateUser(token);
+            User user = analyzeToken(token);
             if (user != null) {
                 SecurityContextHolder.getContext().setAuthentication(
                         new UsernamePasswordAuthenticationToken(user,
@@ -43,5 +39,14 @@ public class TodoAuthFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private User analyzeToken(String token) {
+        String[] tokens = token.split(":");
+        User user = new User();
+
+        user.setName(tokens[1]);
+        user.setId(Integer.valueOf(tokens[0]));
+        return user;
     }
 }

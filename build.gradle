@@ -43,8 +43,12 @@ dependencies {
 	compile 'javax.xml.bind:jaxb-api:2.3.0'
 	runtime('com.h2database:h2')
 	compile('org.springframework.cloud:spring-cloud-starter-feign')
+	compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
+	compile('org.springframework.cloud:spring-cloud-starter-hystrix-dashboard')
 	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.cloud:spring-cloud-starter-consul-discovery')
+//	compile('org.springframework.cloud:spring-cloud-starter-consul-discovery')
+	compile group: 'org.languagetool', name: 'language-en', version: '4.2'
+	compile('org.springframework.retry:spring-retry')
 
 	testCompile('org.springframework.security:spring-security-test')
 	testCompile('org.springframework.boot:spring-boot-starter-test')

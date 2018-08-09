@@ -8,6 +8,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
+import javax.persistence.Transient;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -40,4 +41,7 @@ public class Todo {
 
     @Column(name = "deleted", columnDefinition = "int default 0")
     private Boolean deleted = false;
+
+    @Transient
+    private String suggestion;
 }

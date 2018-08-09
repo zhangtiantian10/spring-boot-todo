@@ -3,6 +3,8 @@ package com.thoughtworks.training.zhangtian.todoservice.service;
 import com.thoughtworks.training.zhangtian.todoservice.model.Todo;
 import com.thoughtworks.training.zhangtian.todoservice.model.User;
 import com.thoughtworks.training.zhangtian.todoservice.repository.TodoRepository;
+import com.thoughtworks.training.zhangtian.todoservice.tools.SpellChecker;
+import com.thoughtworks.training.zhangtian.todoservice.tools.SpellCheckoutRetry;
 import javassist.NotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +20,17 @@ public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
+    @Autowired
+    private SpellCheckoutRetry spellCheckoutRetry;
+
     public List<Todo> get() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         User user = (User) authentication.getPrincipal();
 
         List<Todo> allByUserId = todoRepository.findAllByUserId(user.getId());
-        return allByUserId;
+        List<Todo> todos = spellCheckoutRetry.check(allByUserId);
+        return todos;
     }
 
     public Todo findById(int id) throws NotFoundException {

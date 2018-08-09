@@ -21,6 +21,9 @@ public class TodoAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+        if (!request.getRequestURI().equals("/health")) {
+            logger.info("----------");
+        }
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (!StringUtils.isEmpty(token)) {
             User user = analyzeToken(token);

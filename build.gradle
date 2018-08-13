@@ -49,6 +49,7 @@ dependencies {
 //	compile('org.springframework.cloud:spring-cloud-starter-consul-discovery')
 	compile group: 'org.languagetool', name: 'language-en', version: '4.2'
 	compile('org.springframework.retry:spring-retry')
+	compile('org.springframework.cloud:spring-cloud-starter-config')
 
 	testCompile('org.springframework.security:spring-security-test')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
